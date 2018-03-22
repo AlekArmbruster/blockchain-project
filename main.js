@@ -1,14 +1,16 @@
 const Block = require('./block');
 const Blockchain = require('./blockchain');
+const Transaction = require('./transaction');
 
 let vivifyCoin =  new Blockchain();
 
-console.log('Mining block 1... ')
-vivifyCoin.addBlock(new Block(1, '10/03/2018', { amount: 4 }));
+vivifyCoin.createTransaction(new Transaction('address1', 'address2', 100));
+vivifyCoin.createTransaction(new Transaction('address2', 'address1', 50));
 
-console.log('Mining block 2... ')
-vivifyCoin.addBlock(new Block(2, '12/03/2018', { amount: 10 }));
+console.log('Starting the miner...')
+vivifyCoin.minePendingTransactions('miner-address');
+console.log('Balance of miner is: ' + vivifyCoin.getBalanceOfAddress('miner-address')); 
 
-
-
- // console.log(JSON.stringify(vivifyCoin, null, 4));
+console.log('Starting the miner again...')
+vivifyCoin.minePendingTransactions('miner-address');
+console.log('Balance of miner is: ' + vivifyCoin.getBalanceOfAddress('miner-address'));
